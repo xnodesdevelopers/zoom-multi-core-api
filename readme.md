@@ -54,46 +54,40 @@ export CHROMIUM_PATH="/usr/bin/chromium"
 ```javascript
 const { makeZoomSocket } = require('./zoom-socket');
 
-async function run() {
+async function startZoom() {
   const sock = makeZoomSocket({
-    headless: true,
-    // chromiumPath: '/usr/bin/chromium' // Optional custom binary path
+    headless: false,                    // important
+    chromiumPath: '/usr/bin/chromium'
   });
 
-  // Listen to connection lifecycle changes
   sock.ev.on('connection.update', (update) => {
     const { id, name, status, error } = update;
-    console.log(`[STATUS: ${status.toUpperCase()}] ${name} (${id})`);
-    if (error) {
-      console.error(`Error details: ${error}`);
-    }
+    console.log(`[${status.toUpperCase()}] ${name || id}`, error || '');
   });
 
-  // Listen to outgoing message confirmations
-  sock.ev.on('messages.upsert', (data) => {
-    console.log(`[MESSAGE SENT] ${data.name}: ${data.message}`);
+  sock.ev.on('messages.upsert', (m) => {
+    console.log(`[MESSAGE SENT] ${m.name}: "${m.message}"`);
   });
 
-  // Connect multiple participants
-  await sock.join({
-    meetingId: '1234567890',
-    passcode: 'pass123',
-    participants: ['Client_Bot_01', 'Client_Bot_02']
+  const results = await sock.join({
+    meetingId: '81601161660',
+    passcode: 'mXZzK3',
+    participants: ['Sanku_Bot_01', 'Sanku_Bot_02']
   });
 
-  // Broadcast message to meeting chat
+  console.log('Join results:', results);
+
   setTimeout(async () => {
-    await sock.sendMessage('all', { text: 'Automated session active.' });
-  }, 10000);
+    await sock.sendMessage('all', { text: 'Hello from API!' });
+  }, 15000);
 
-  // Gracefully terminate after execution
   setTimeout(async () => {
-    console.log('Closing sessions...');
+    console.log('Terminating...');
     await sock.end();
   }, 60000);
 }
 
-run();
+startZoom().catch(console.error);
 ```
 
 ---
