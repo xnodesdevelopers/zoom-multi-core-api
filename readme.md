@@ -1,5 +1,6 @@
 
 # zoom-multi-core-api
+(Bypassing Zoom Bot detection)
 
 > Event-driven, lightweight multi-session automation engine for the Zoom Web Client built with Playwright.
 
