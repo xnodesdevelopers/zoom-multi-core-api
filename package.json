@@ -1,0 +1,23 @@
+{
+  "name": "zoom-multi-core-api",
+  "version": "1.0.0",
+  "description": "lightweight multi-session automation engine for Zoom Web Client",
+  "main": "zoom-socket.js",
+  "scripts": {
+    "start": "node example.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "zoom",
+    "automation",
+    "playwright",
+    "multi-session",
+    "baileys-style",
+    "bot"
+  ],
+  "author": "Tharindu Liyanage (Sanku)",
+  "license": "MIT",
+  "dependencies": {
+    "playwright": "^1.40.0"
+  }
+}
