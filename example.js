@@ -12,11 +12,11 @@ async function startZoom() {
     const { id, name, status, error } = update;
 
     if (status === 'connecting') {
-      console.log(`[CONNECTING] Bot: ${name} (ID: ${id})`);
+      console.log(`[CONNECTING] User: ${name} (ID: ${id})`);
     } else if (status === 'open') {
-      console.log(`[ONLINE] Bot joined meeting: ${name} (ID: ${id})`);
+      console.log(`[ONLINE] User joined meeting: ${name} (ID: ${id})`);
     } else if (status === 'close') {
-      console.log(`[DISCONNECTED] Bot: ${name} left or failed. Reason:`, error || 'Explicit disconnect');
+      console.log(`[DISCONNECTED] User: ${name} left or failed. Reason:`, error || 'Explicit disconnect');
     }
   });
 
